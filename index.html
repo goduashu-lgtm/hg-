@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>A Little Universe For You ✦</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:Georgia,serif;
+  background:#02030d;
+  color:white;
+}
+
+/* ================= OPENING PAGE ================= */
+
+#intro{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 45%,#20245c 0%,#080b2b 30%,#02030d 75%);
+  transition:opacity 1.5s ease,visibility 1.5s;
+}
+
+.introStars{
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(white 1px,transparent 1px),
+    radial-gradient(#aaaaff 1px,transparent 1px);
+  background-size:90px 90px,140px 140px;
+  background-position:20px 30px,70px 80px;
+  opacity:.6;
+  animation:drift 25s linear infinite;
+}
+
+.introContent{
+  position:relative;
+  z-index:2;
+  padding:30px;
+}
+
+.introContent h1{
+  font-size:clamp(38px,9vw,80px);
+  font-weight:normal;
+  letter-spacing:3px;
+  text-shadow:0 0 25px #aebaff;
+  margin-bottom:18px;
+}
+
+.introContent p{
+  font-size:clamp(15px,3vw,21px);
+  opacity:.8;
+  max-width:550px;
+  line-height:1.7;
+  margin:auto;
+}
+
+.enter{
+  margin-top:40px;
+  padding:16px 40px;
+  border:1px solid #ffffff88;
+  border-radius:50px;
+  background:#ffffff0d;
+  color:white;
+  font-size:17px;
+  letter-spacing:2px;
+  cursor:pointer;
+  backdrop-filter:blur(8px);
+  transition:.3s;
+}
+
+.enter:hover{
+  background:#ffffff22;
+  box-shadow:0 0 30px #9ba9ff88;
+  transform:scale(1.05);
+}
+
+.hideIntro{
+  opacity:0;
+  visibility:hidden;
+}
+
+/* ================= UNIVERSE ================= */
+
+#universe{
+  position:relative;
+  width:100%;
+  height:100%;
+  background:
+    radial-gradient(circle at 50% 50%,#10184b 0%,#070b27 35%,#02030d 80%);
+}
+
+/* stars */
+
+.starfield{
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(white 1px,transparent 1px),
+    radial-gradient(#ffffffaa 1px,transparent 1px),
+    radial-gradient(#8da1ff 1px,transparent 1px);
+  background-size:110px 110px,170px 170px,230px 230px;
+  background-position:20px 20px,60px 100px,130px 40px;
+  animation:starsMove 35s linear infinite;
+}
+
+@keyframes starsMove{
+  from{transform:scale(1)}
+  50%{transform:scale(1.08)}
+  to{transform:scale(1)}
+}
+
+@keyframes drift{
+  from{transform:translate(0,0)}
+  to{transform:translate(-80px,-50px)}
+}
+
+/* ================= OBJECTS ================= */
+
+.object{
+  position:absolute;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  user-select:none;
+  transition:.3s;
+  filter:drop-shadow(0 0 12px #ffffff55);
+}
+
+.object:hover{
+  transform:scale(1.2);
+  filter:drop-shadow(0 0 25px #ffffffcc);
+}
+
+/* moon */
+
+.moon{
+  width:95px;
+  height:95px;
+  border-radius:50%;
+  background:#fff6c7;
+  box-shadow:0 0 35px #fff1a8,0 0 90px #fff1a844;
+}
+
+.moon:after{
+  content:"";
+  position:absolute;
+  width:95px;
+  height:95px;
+  border-radius:50%;
+  background:#080b27;
+  left:27px;
+  top:-8px;
+}
+
+/* planet */
+
+.planet{
+  width:75px;
+  height:75px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#7d63c9,#d78acb);
+  box-shadow:0 0 30px #ad79ff99;
+}
+
+.planet:after{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:27px;
+  border:4px solid #e0c7ff88;
+  border-radius:50%;
+  transform:rotate(-18deg);
+}
+
+/* little stars */
+
+.star{
+  width:25px;
+  height:25px;
+  color:#fff4a8;
+  font-size:30px;
+  text-shadow:0 0 20px #fff3a0;
+}
+
+/* flower */
+
+.flower{
+  width:70px;
+  height:90px;
+}
+
+.flower .stem{
+  position:absolute;
+  bottom:0;
+  width:5px;
+  height:55px;
+  background:#5b9d68;
+}
+
+.flower .petal{
+  position:absolute;
+  width:25px;
+  height:35px;
+  background:#ff9bc8;
+  border-radius:50%;
+}
+
+.p1{top:5px;left:23px}
+.p2{top:15px;left:5px;transform:rotate(-45deg)}
+.p3{top:15px;right:5px;transform:rotate(45deg)}
+.p4{top:30px;left:23px;transform:rotate(180deg)}
+
+.flower .center{
+  position:absolute;
+  top:22px;
+  left:25px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:#ffd75e;
+}
+
+/* tree */
+
+.tree{
+  width:100px;
+  height:120px;
+}
+
+.trunk{
+  position:absolute;
+  bottom:0;
+  left:43px;
+  width:15px;
+  height:55px;
+  background:#80563d;
+}
+
+.leaves{
+  position:absolute;
+  top:0;
+  left:10px;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:#527d70;
+  box-shadow:30px 15px 0 #416b60,-20px 20px 0 #638e71;
+}
+
+/* comet */
+
+.comet{
+  width:120px;
+  height:30px;
+  transform:rotate(-25deg);
+}
+
+.cometHead{
+  position:absolute;
+  right:0;
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 0 25px white;
+}
+
+.cometTail{
+  position:absolute;
+  right:15px;
+  width:100px;
+  height:8px;
+  background:linear-gradient(90deg,transparent,#b7d7ff);
+  filter:blur(3px);
+}
+
+/* cloud */
+
+.cloud{
+  width:110px;
+  height:45px;
+  background:#9ba9d933;
+  border-radius:50px;
+  box-shadow:0 0 25px #8998d944;
+}
+
+.cloud:before,
+.cloud:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  background:#9ba9d933;
+}
+
+.cloud:before{
+  width:55px;
+  height:55px;
+  left:20px;
+  top:-25px;
+}
+
+.cloud:after{
+  width:45px;
+  height:45px;
+  right:15px;
+  top:-18px;
+}
+
+/* crystal */
+
+.crystal{
+  width:45px;
+  height:75px;
+  background:linear-gradient(120deg,#b5eaff,#8067ff);
+  clip-path:polygon(50% 0,100% 25%,80% 100%,20% 100%,0 25%);
+  box-shadow:0 0 35px #88bfff;
+}
+
+/* ================= POSITIONS ================= */
+
+.o1{top:13%;left:12%}
+.o2{top:17%;right:15%}
+.o3{top:42%;left:8%}
+.o4{top:30%;left:42%}
+.o5{top:60%;left:17%}
+.o6{top:67%;right:18%}
+.o7{top:78%;left:42%}
+.o8{top:45%;right:9%}
+.o9{top:12%;left:48%}
+.o10{top:77%;right:45%}
+.o11{top:52%;left:48%}
+.o12{top:30%;right:32%}
+
+/* ================= MESSAGE ================= */
+
+#messageBox{
+  position:fixed;
+  left:50%;
+  bottom:35px;
+  transform:translateX(-50%);
+  width:min(650px,90%);
+  padding:20px 25px;
+  border:1px solid #ffffff33;
+  border-radius:20px;
+  background:#050817cc;
+  backdrop-filter:blur(15px);
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.5s;
+  z-index:20;
+  box-shadow:0 0 40px #000;
+}
+
+#messageBox.show{
+  opacity:1;
+}
+
+#message{
+  font-size:clamp(16px,3vw,21px);
+  line-height:1.6;
+}
+
+.close{
+  margin-top:12px;
+  font-size:12px;
+  opacity:.5;
+}
+
+/* title */
+
+.universeTitle{
+  position:absolute;
+  top:25px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:clamp(14px,3vw,20px);
+  letter-spacing:5px;
+  opacity:.65;
+  text-transform:uppercase;
+}
+
+/* mobile */
+
+@media(max-width:600px){
+  .moon{width:70px;height:70px}
+  .moon:after{width:70px;height:70px}
+  .planet{width:55px;height:55px}
+  .tree{transform:scale(.7)}
+  .flower{transform:scale(.7)}
+  .comet{transform:rotate(-25deg) scale(.7)}
+  .cloud{transform:scale(.7)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= INTRO ================= -->
+
+<div id="intro">
+
+  <div class="introStars"></div>
+
+  <div class="introContent">
+
+    <h1>A Little Universe</h1>
+
+    <p>
+      I couldn't give you something in person,
+      so I made you a tiny universe instead.
+      There's something hidden in here for you.
+    </p>
+
+    <button class="enter" onclick="enterUniverse()">
+      ✦ ENTER ✦
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= UNIVERSE ================= -->
+
+<div id="universe">
+
+<div class="starfield"></div>
+
+<div class="universeTitle">
+  somewhere between the stars
+</div>
+
+
+<!-- 1 MOON -->
+
+<div class="object moon o1"
+onclick="showMessage('I can’t meet you in person right now, but I hope you know that distance doesn’t make your friendship any less important to me. 🌙')">
+</div>
+
+
+<!-- 2 PLANET -->
+
+<div class="object planet o2"
+onclick="showMessage('There is still so much I want to know about you — the little things, the things you love, the things that make you laugh. I want to know you more. 🪐')">
+</div>
+
+
+<!-- 3 STAR -->
+
+<div class="object star o3"
+onclick="showMessage('Some people just make life a little brighter without even trying. You are one of those people for me. ✦')">
+  ★
+</div>
+
+
+<!-- 4 FLOWER -->
+
+<div class="object flower o4"
+onclick="showMessage('I hope this friendship keeps growing, even if we are growing from different places. 🌸')">
+
+  <div class="stem"></div>
+  <div class="petal p1"></div>
+  <div class="petal p2"></div>
+  <div class="petal p3"></div>
+  <div class="petal p4"></div>
+  <div class="center"></div>
+
+</div>
+
+
+<!-- 5 TREE -->
+
+<div class="object tree o5"
+onclick="showMessage('A good friendship doesn’t have to be perfect or have thousands of memories. Sometimes just having someone who genuinely cares is enough. 🌳')">
+
+  <div class="leaves"></div>
+  <div class="trunk"></div>
+
+</div>
+
+
+<!-- 6 COMET -->
+
+<div class="object comet o6"
+onclick="showMessage('If you ever have a bad day, I hope you remember that somewhere out there, your friend is still rooting for you. ☄️')">
+
+  <div class="cometTail"></div>
+  <div class="cometHead"></div>
+
+</div>
+
+
+<!-- 7 STAR -->
+
+<div class="object star o7"
+onclick="showMessage('I don’t need a reason to appreciate you. I’m just genuinely glad our paths crossed. ✨')">
+  ✦
+</div>
+
+
+<!-- 8 CLOUD -->
+
+<div class="object cloud o8"
+onclick="showMessage('You don’t always have to be okay around me. You can just be yourself. That’s enough. ☁️')">
+</div>
+
+
+<!-- 9 STAR -->
+
+<div class="object star o9"
+onclick="showMessage('Maybe we don’t have a hundred memories yet… but that just means there are still so many moments waiting for us. ⭐')">
+  ★
+</div>
+
+
+<!-- 10 CRYSTAL -->
+
+<div class="object crystal o10"
+onclick="showMessage('I hope you know that I value the person you are, not just the conversations we have. 💎')">
+</div>
+
+
+<!-- 11 STAR -->
+
+<div class="object star o11"
+onclick="showMessage('Even when we aren’t talking, you can still count me as your friend. No pressure, no conditions. 🌟')">
+  ✧
+</div>
+
+
+<!-- 12 PLANET -->
+
+<div class="object planet o12"
+onclick="showMessage('There are probably a million things I still don’t know about you. And honestly? I’d like to discover them slowly. 🌌')">
+</div>
+
+
+<!-- MESSAGE -->
+
+<div id="messageBox">
+
+  <div id="message"></div>
+
+  <div class="close">
+    tap anywhere else to keep exploring ✦
+  </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+function enterUniverse(){
+
+  document.getElementById("intro").classList.add("hideIntro");
+
+}
+
+function showMessage(text){
+
+  const box=document.getElementById("messageBox");
+  const message=document.getElementById("message");
+
+  message.textContent=text;
+
+  box.classList.add("show");
+
+}
+
+document.getElementById("universe").addEventListener("click",function(e){
+
+  if(!e.target.closest(".object")){
+    document.getElementById("messageBox").classList.remove("show");
+  }
+
+});
+
+</script>
+
+</body>
+  </html>
